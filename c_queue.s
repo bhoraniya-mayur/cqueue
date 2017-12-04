@@ -17,12 +17,12 @@ __main FUNCTION
 		MOV R1, #START		;R1 : Queue rear
 		MOV R3, #ADDR		;R3 : Queue start Adddress in Memory
 		MOV R4, #START		;R4 : Queue front
-loop	CMP R0,#0			;This loop will make entire queue full
-		BLGT  enqueue		;call enqueue
+loop		BLGT  enqueue		;call enqueue
+		CMP R0,#0		;This loop will make entire queue full
 		BGT loop			
-		BL dequeue			;dequeue
-		BL dequeue			;dequeue
-		BL enqueue			;enqueue
+		BL dequeue		;dequeue
+		BL dequeue		;dequeue
+		BL enqueue		;enqueue
 stop 	B stop
 
 enqueue
@@ -33,7 +33,7 @@ enqueue
 		ADD R1,#4			;increment rear
 		CMP R1,#SIZE		;if rear pointer reached to last position	
 		MOVEQ R1,#START		;then, move it to first position 
-		SUBGT R0,R0,#4		;decrement queue size
+		SUB R0,R0,#4		;decrement queue size
 		BX	LR		
 
 dequeue
